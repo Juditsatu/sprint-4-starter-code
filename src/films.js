@@ -1,3 +1,5 @@
+const { zlib } = require("browserify/lib/builtins");
+
 // Exercise 1: Get the array of all directors.
 function getAllDirectors(array) {
   let result =  array.map(x => x.director);
@@ -27,22 +29,44 @@ function orderAlphabetically(array) {
 }
 
 // Exercise 5: Order by year, ascending
-function orderByYear(array) {
-  let sortYear = array.sort((a, b) => b.year - a.year, 'en', { numeric: true });
-  let result = array.forEach((e) => {
-    console.log(`${e.title}: ${e.year}`);
-  });
+function orderByYear(array, year) {
+  array= array.sort((a, b) => a.title.localeCompare(b.title));
+  year = array.sort((a, b) => a.year - b.year);
+  let result = year.slice(0, 20);
+  //l'ordre de pel·lícules és correcte, però el test ascending order falla...
+  //console.log(result)
   return result;
 }
 
 // Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory() {
-
+function moviesAverageByCategory(array, genre) {
+  genre = array.filter(array => array.genre == genre);
+  let averageScore = genre.reduce(
+    (score, average) => score + average.score, 0) / genre.length;
+    //no poso el .toFixed(2) pero al test surt passed??
+    //el metode reduce ignora els score "buits" pero el test falla
+  return averageScore; 
 }
 
 // Exercise 7: Modify the duration of movies to minutes
-function hoursToMinutes() {
-
+function hoursToMinutes(array) {
+  // const index = array.forEach((element) => {
+  //   element.duration;
+  // let test = array[index].duration;
+  // });
+  // let indexArr = array.findIndex((x => x.duration == x.duration))
+  // let movieHours = array.map(x => x.duration);
+  // let minutes = array.duration.replace(/[a-z]/g,"");
+  // let hourToMinute = minutes[0] * 60 + Number(minutes[2]) + Number(minutes[3]);
+  // array.forEach((obj) => {
+  //   let minutes = obj.duration.replace(/[a-z]/g,"");
+  //   let hourToMinute = minutes[0] * 60 + Number(minutes[2]) + Number(minutes[3]);
+  //   return hourToMinute;
+  // });
+  // const indexTime = array.forEach((obj) => {
+  //   console.log(obj.duration.replace(/[a-z]/g,""))
+  // });
+  return;
 }
 
 // Exercise 8: Get the best film of a year
