@@ -70,18 +70,21 @@ function hoursToMinutes(array) {
   // });
   const movieMinutes = array.map((e) => {
     let arrDuration = e.duration.replace(/[a-z ]/g,"");
-    let hours = Number(arrDuration[0]);
-    let hourToMinute = arrDuration.length > 2 ? 
-    hours * 60 + Number(arrDuration[1]) + Number(arrDuration[1]) : Number(arrDuration);
+    let hours = Number(arrDuration[0]) > 0 ? Number(arrDuration[0]) * 60 : 0;
+    let minutes = arrDuration.length > 2 ? Number(arrDuration[1] + arrDuration[2]) : 0;
+    let hourToMinute = Number(hours + minutes);
     return {...e, duration: hourToMinute};
   });
 
-  return movieMinutes
+  return movieMinutes;
+
 }
 
 // Exercise 8: Get the best film of a year
-function bestFilmOfYear() {
-  
+function bestFilmOfYear(array, year) {
+  let yearFilm = array.filter(array => array.year == year).sort();
+  let result = yearFilm.slice(0, 1)
+  return result;
 }
 
 
