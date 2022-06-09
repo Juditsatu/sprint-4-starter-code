@@ -42,32 +42,15 @@ function orderByYear(array, year) {
 function moviesAverageByCategory(array, genre) {
   genre = array.filter(array => array.genre == genre);
   let averageScore = genre.reduce(
-    (score, average) => score + average.score, 0) / genre.length;
+    (score, average) => score + average.score, 0);
+  let averageMovieScore = averageScore / genre.length;
     //no poso el .toFixed(2) pero al test surt passed??
     //el metode reduce ignora els score "buits" pero el test falla
-  return averageScore; 
+  return averageMovieScore; 
 }
 
 // Exercise 7: Modify the duration of movies to minutes
 function hoursToMinutes(array) {
-  // array= array.sort((a, b) => a.duration.localeCompare(b.duration));
-  // let result = array.map(e => e.duration)
-  // const index = array.forEach((element) => {
-  //   element.duration;
-  // let test = array[index].duration;
-  // });
-  // let indexArr = array.findIndex((x => x.duration == x.duration))
-  // let movieHours = array.map(x => x.duration);
-  // let minutes = array.duration.replace(/[a-z]/g,"");
-  // let hourToMinute = minutes[0] * 60 + Number(minutes[2]) + Number(minutes[3]);
-  // array.forEach((obj) => {
-  //   let minutes = obj.duration.replace(/[a-z]/g,"");
-  //   let hourToMinute = minutes[0] * 60 + Number(minutes[2]) + Number(minutes[3]);
-  //   return hourToMinute;
-  // });
-  // const indexTime = array.forEach((obj) => {
-  //   console.log(obj.duration.replace(/[a-z]/g,""))
-  // });
   const movieMinutes = array.map((e) => {
     let arrDuration = e.duration.replace(/[a-z ]/g,"");
     let hours = Number(arrDuration[0]) > 0 ? Number(arrDuration[0]) * 60 : 0;
@@ -77,7 +60,6 @@ function hoursToMinutes(array) {
   });
 
   return movieMinutes;
-
 }
 
 // Exercise 8: Get the best film of a year
